@@ -15,7 +15,7 @@ steps:
 - name: test 
   image: golang
   commands:
-  - go test ./... 
+  - go test -parallel 10 ./... 
 
 - name: golangci-lint
   image: golangci/golangci-lint:v1.39
