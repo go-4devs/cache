@@ -1,0 +1,23 @@
+kind: pipeline
+name: default
+
+services:
+  - name: redis
+    image: redis
+  - name: memcache
+    image: memcached
+
+environment:
+  FDEVS_CACHE_REDIS_HOST: redis:6379
+  FDEVS_CACHE_MEMCACHE_HOST: memcache:11211
+
+steps:
+- name: test 
+  image: golang
+  commands:
+  - go test ./... 
+
+- name: golangci-lint
+  image: golangci/golangci-lint:v1.39
+  commands:
+  - golangci-lint run
